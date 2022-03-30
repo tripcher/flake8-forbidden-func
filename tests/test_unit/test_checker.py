@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from flake8_forbidden_func.checker import FunctionChecker
 
 

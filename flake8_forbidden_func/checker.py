@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Generator, Tuple
 
 from flake8_forbidden_func.__version__ import __version__ as version

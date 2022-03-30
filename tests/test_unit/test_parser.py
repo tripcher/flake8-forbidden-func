@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pytest
 
 from flake8_forbidden_func.custom_types import Rule
