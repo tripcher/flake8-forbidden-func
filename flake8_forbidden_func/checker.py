@@ -1,6 +1,7 @@
 from typing import Generator, Tuple
 
 from flake8_forbidden_func.__version__ import __version__ as version
+from flake8_forbidden_func.parser import parse_function_rules
 
 
 class FunctionChecker:
@@ -29,7 +30,14 @@ class FunctionChecker:
 
     @classmethod
     def parse_options(cls, options) -> None:
-        pass
+        if options.forbidden_functions:
+            cls.forbidden_functions = parse_function_rules(
+                raw_option_data=options.forbidden_functions
+            )
+        if options.allowed_functions:
+            cls.allowed_functions = parse_function_rules(
+                raw_option_data=options.allowed_functions
+            )
 
     def run(self) -> Generator[Tuple[int, int, str, type], None, None]:
         if False:
