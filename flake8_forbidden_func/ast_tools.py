@@ -25,9 +25,9 @@ def convert_func_to_callable_string(*, node: ast.AST) -> str:
     attributes = []
     current_node = node
     while current_node:
-        currant_name, next_node = unpack_func_node(node=current_node)
-        if currant_name:
-            attributes.append(currant_name)
+        current_name, next_node = unpack_func_node(node=current_node)
+        if current_name:
+            attributes.append(current_name)
         if next_node:
             current_node = next_node
         else:
