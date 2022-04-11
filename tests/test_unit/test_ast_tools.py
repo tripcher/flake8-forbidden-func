@@ -7,7 +7,7 @@ from flake8_forbidden_func.ast_tools import (
     convert_callable_to_callable_string,
     extract_callable_string_from
 )
-
+from flake8_forbidden_func.custom_types import CallableNode
 
 _python_code = """
 from bar import Model
@@ -23,12 +23,12 @@ if faz == baz:
 
 def test__extract_callable_string_from():
     expected_result = [
-        'Model.objects.filter',
-        'Model.objects.all',
-        'Model.objects.annotate',
-        'bar_func',
-        'q.filter',
-        'fuz.bar'
+        CallableNode(callable_str='Model.objects.all', lineno=4, col_offset=6),
+        CallableNode(callable_str='Model.objects.annotate', lineno=4, col_offset=6),
+        CallableNode(callable_str='fuz.bar', lineno=9, col_offset=11),
+        CallableNode(callable_str='q.filter', lineno=8, col_offset=10),
+        CallableNode(callable_str='Model.objects.filter', lineno=4, col_offset=6),
+        CallableNode(callable_str='bar_func', lineno=5, col_offset=6)
     ]
     tree = ast.parse(_python_code)
 

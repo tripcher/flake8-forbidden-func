@@ -2,10 +2,19 @@ from __future__ import annotations
 
 import ast
 
+from flake8_forbidden_func.custom_types import CallableNode
 
-def extract_callable_string_from(*, tree: ast.Module) -> list[str]:
+
+def extract_callable_string_from(*, tree: ast.Module) -> list[CallableNode]:
     callables = extract_callable_from(tree=tree)
-    return list(map(convert_callable_to_callable_string, callables))
+    return [
+        CallableNode(
+            callable_str=convert_callable_to_callable_string(call=node),
+            lineno=node.lineno,
+            col_offset=node.col_offset
+        )
+        for node in callables
+    ]
 
 
 def extract_callable_from(*, tree: ast.Module) -> list[ast.Call]:

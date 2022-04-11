@@ -7,19 +7,20 @@ from flake8_forbidden_func.pathes import convert_python_filepath_to_importable
 def collect_all_forbidden_rules_for(
     *,
     filename: str,
-    forbidden_rules: dict[str, list[Rule]],
-    allowed_rules: dict[str, list[Rule]],
+    forbidden_rules: dict[str, list[Rule]] | None,
+    allowed_rules: dict[str, list[Rule]] | None,
 ) -> set[Rule]:
     matching_rules = []
     verifiable_import = convert_python_filepath_to_importable(filename)
 
-    for import_rule, rules in forbidden_rules.items():
-        if is_rule_matched(verifiable=verifiable_import, rule=import_rule):
-            matching_rules += rules
-
-    for import_rule, rules in allowed_rules.items():
-        if not is_rule_matched(verifiable=verifiable_import, rule=import_rule):
-            matching_rules += rules
+    if forbidden_rules:
+        for import_rule, rules in forbidden_rules.items():
+            if is_rule_matched(verifiable=verifiable_import, rule=import_rule):
+                matching_rules += rules
+    if allowed_rules:
+        for import_rule, rules in allowed_rules.items():
+            if not is_rule_matched(verifiable=verifiable_import, rule=import_rule):
+                matching_rules += rules
     return set(matching_rules)
 
 
