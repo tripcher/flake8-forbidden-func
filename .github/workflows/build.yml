@@ -20,7 +20,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: pip install -r requirements_dev.txt
-      - name: Run mdl
+      - name: Run mdl --line-length 120
         uses: actionshub/markdownlint@main
       - name: Run checks
         run: make style types requirements

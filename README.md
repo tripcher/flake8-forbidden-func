@@ -41,12 +41,11 @@ Usage:
 
 ```terminal
 $ flake8 users/views.py
-users/views.py:6:11: CFF001 datetime.datetime.now call is forbidden, since we use django utils.
+users/views.py:6:11: CFF001 datetime.datetime.now call is forbidden,since we use django utils.
 users/views.py:7:11: CFF001 *.objects.* call is forbidden, since only selectors module should use ORM.
 users/views.py:7:11: CFF001 *.objects.* call is forbidden, since only selectors module should use ORM.
 users/views.py:7:11: CFF001 *.objects.* call is forbidden, since only selectors module should use ORM.
 users/views.py:11:15: CFF001 *.filter call is forbidden, since views module should not use ORM filter.
-
 ```
 
 Tested on Python 3.7+ and flake8 4.0+.
