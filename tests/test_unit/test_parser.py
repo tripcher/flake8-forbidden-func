@@ -11,7 +11,7 @@ from flake8_forbidden_func.parser import parse_function_rules
     [
         (
             (
-                'foo.bar: *.annotate, error comment\n'
+                'foo.bar, *.foo.bar: *.annotate, error comment\n'
                 '*.foo.bar.*: Model.object.*, error\n'
                 'foo.bar: ModelClass, error 2\n'
             ),
@@ -20,10 +20,20 @@ from flake8_forbidden_func.parser import parse_function_rules
                     Rule(rule='*.annotate', comment='error comment'),
                     Rule(rule='ModelClass', comment='error 2'),
                 ],
+                '*.foo.bar': [
+                    Rule(rule='*.annotate', comment='error comment'),
+                ],
                 '*.foo.bar.*': [Rule(rule='Model.object.*', comment='error')]
             }
         ),
-        ('  *: Foo.bar, comment  ', {'*': [Rule(rule='Foo.bar', comment='comment')]})
+        (
+            '  *,    foo  , bar: Foo.bar, comment  ',
+            {
+                '*': [Rule(rule='Foo.bar', comment='comment')],
+                'foo': [Rule(rule='Foo.bar', comment='comment')],
+                'bar': [Rule(rule='Foo.bar', comment='comment')]
+            }
+        )
     ]
 )
 def test__parse_function_rules(raw_rules, expected_result):
