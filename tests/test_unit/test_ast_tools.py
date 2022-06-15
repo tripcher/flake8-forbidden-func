@@ -50,7 +50,9 @@ def test__extract_callable_string_from():
         ('bur_func().bar_func()', 'bur_func.bar_func'),
         ('bur_func(t=1)', 'bur_func'),
         ('q.func()', 'q.func'),
-        ('Model()', 'Model')
+        ('Model()', 'Model'),
+        ('Service(attr)()', 'Service'),
+        ('Foo(attr)()()()()()()', 'Foo'),
     ]
 )
 def test__convert_callable_to_callable_string(code, expected_str):

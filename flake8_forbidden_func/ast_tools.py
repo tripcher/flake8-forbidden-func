@@ -24,6 +24,8 @@ def extract_callable_from(*, tree: ast.Module) -> list[ast.Call]:
 def convert_callable_to_callable_string(call: ast.Call) -> str:
     if not isinstance(call, ast.Call):
         raise ValueError('Expected Call node.')
+    if isinstance(call.func, ast.Call):
+        return convert_callable_to_callable_string(call=call.func)
     return convert_func_to_callable_string(node=call.func)
 
 
