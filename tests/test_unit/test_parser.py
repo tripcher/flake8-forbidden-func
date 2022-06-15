@@ -33,6 +33,10 @@ from flake8_forbidden_func.parser import parse_function_rules
                 'foo': [Rule(rule='Foo.bar', comment='comment')],
                 'bar': [Rule(rule='Foo.bar', comment='comment')]
             }
+        ),
+        (
+            '    ',
+            {}
         )
     ]
 )

@@ -9,6 +9,8 @@ def parse_function_rules(*, raw_option_data: str) -> dict[str, list[Rule]]:
     lines = raw_option_data.strip().split('\n')
     parsed_option = collections.defaultdict(list)
     for line in lines:
+        if not line.strip():
+            continue
         imports_from, raw_rules = line.split(': ')
         rule, comment = raw_rules.split(', ')
         for import_from in imports_from.split(', '):
