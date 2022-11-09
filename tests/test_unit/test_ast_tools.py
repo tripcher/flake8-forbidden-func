@@ -53,6 +53,7 @@ def test__extract_callable_string_from():
         ('Model()', 'Model'),
         ('Service(attr)()', 'Service'),
         ('Foo(attr)()()()()()()', 'Foo'),
+        ('Stack[int]()', 'Stack'),
     ]
 )
 def test__convert_callable_to_callable_string(code, expected_str):

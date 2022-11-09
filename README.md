@@ -52,6 +52,7 @@ Tested on Python 3.7+ and flake8 4.0+.
 
 ## Error codes
 
-| Error code |                     Description          |
-|:----------:|:----------------------------------------:|
-|   CFF001   | call is forbidden, since reason |
+| Error code |                            Description                             |
+|:----------:|:------------------------------------------------------------------:|
+|   CFF001   |                  call is forbidden, since reason                   |
+|   CFF000   | happens when we get unhandled exception during the linting process |

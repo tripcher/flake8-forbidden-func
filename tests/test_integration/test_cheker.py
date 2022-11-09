@@ -15,6 +15,8 @@ baz = bar_func()
 if faz == baz:
     fuz = q.filter(a=1)
     return fuz.bar()
+
+stack = Stack[int]()
 """
 
 

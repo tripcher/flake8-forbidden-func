@@ -1,12 +1,13 @@
 astor==0.8.1
 astpretty==2.1.0
 attrs==21.4.0
+build==0.9.0
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.1.0
 coverage==6.3.2
 dlint==0.12.0
-dparse==0.5.1
+dparse==0.6.2
 eradicate==2.0.0
 flake8==4.0.1
 flake8-2020==1.6.1
@@ -40,6 +41,7 @@ mr-proper==0.0.7
 mypy==0.942
 mypy-extensions==0.4.3
 packaging==21.3
+pep517==0.13.0
 pluggy==1.0.0
 py==1.11.0
 pycodestyle==2.8.0
@@ -50,7 +52,9 @@ pytest==7.1.1
 pytest-cov==3.0.0
 PyYAML==6.0
 requests==2.27.1
-safety==1.10.3
+ruamel.yaml==0.17.21
+ruamel.yaml.clib==0.2.7
+safety==2.2.0
 six==1.16.0
 snowballstemmer==2.2.0
 stdlib-list==0.8.0
