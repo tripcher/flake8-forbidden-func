@@ -30,6 +30,9 @@ def convert_callable_to_callable_string(call: ast.Call) -> str:
 
 
 def convert_func_to_callable_string(*, node: ast.AST) -> str:
+    if isinstance(node, ast.Subscript):
+        return convert_func_to_callable_string(node=node.value)
+
     if not isinstance(node, (ast.Name, ast.Attribute)):
         raise ValueError('Expected Name node or Attribute node.')
 

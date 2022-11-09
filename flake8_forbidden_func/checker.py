@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Generator, Tuple
+import traceback
+from typing import Generator, Tuple, List
 
 from flake8_forbidden_func.__version__ import __version__ as version
 from flake8_forbidden_func.ast_tools import extract_callable_string_from
@@ -18,6 +19,7 @@ class FunctionChecker:
     def __init__(self, tree, filename: str):
         self.filename = filename
         self.tree = tree
+        self.violations: List[Tuple[int, int, str, type]] = []
 
     @classmethod
     def add_options(cls, parser) -> None:
@@ -47,6 +49,19 @@ class FunctionChecker:
         if not self.forbidden_functions and not self.allowed_functions:
             return
 
+        try:
+            self._run()
+        except Exception as exc:  # noqa: B902
+            traceback.print_exc()
+            self.violations.append(
+                (1, 1, 'CFF000 {error}'.format(error=str(exc)), type(self))
+            )
+
+        yield from (
+            error for error in self.violations
+        )
+
+    def _run(self):
         matching_forbidden_rules = collect_all_forbidden_rules_for(
             filename=self.filename,
             forbidden_rules=self.forbidden_functions,
@@ -58,5 +73,7 @@ class FunctionChecker:
                 for rule in matching_forbidden_rules:
                     if is_rule_matched(verifiable=callable_node.callable_str, rule=rule.rule):
                         error_text = f'CFF001 {rule.rule} call is forbidden, since {rule.comment}.'
-                        yield callable_node.lineno, callable_node.col_offset, error_text, type(self)
+                        self.violations.append(
+                            (callable_node.lineno, callable_node.col_offset, error_text, type(self))
+                        )
                         break
